@@ -14,8 +14,8 @@
     --secondary-background-transparent: rgba(0, 0, 0, 0.7); /* Slightly more opaque black for overlays */
 
     /* UI ELEMENTS */
-    --rounded-cards: 18px; /* Slightly more rounded */
-    --blur: 15px; /* More pronounced blur effect for glassmorphism */
+    --rounded-cards: 8px; /* MODIFIED: Reduced from 18px to 8px for subtler corners */
+    --blur: 10px; /* MODIFIED: Slightly less blur for clearer elements */
     --border-radius-pill: 9999px; /* Standard pill shape for buttons/tabs */
     --transition-speed: 0.3s; /* Global transition speed for smooth animations */
 
@@ -190,7 +190,7 @@ progress::-webkit-progress-value {
 .cardPadder,
 .cardOverlayContainer,
 .blurhash-canvas,
-.dialog,
+.dialog, /* This should give the media info box slightly rounded corners */
 .itemSelectionPanel,
 .nowPlayingPageImage {
     border-radius: var(--rounded-cards) !important;
@@ -210,13 +210,13 @@ progress::-webkit-progress-value {
 /* Floating progress bar */
 .innerCardFooter {
     border-radius: var(--rounded-cards) !important;
-    margin-left: 8px !important; /* More spacing */
+    margin-left: 8px !important;
     margin-bottom: 8px !important;
-    padding: 6px 18px 6px 6px !important; /* Increased padding */
+    padding: 6px 18px 6px 6px !important;
     bottom: 0% !important;
-    background: rgba(0,0,0,0.6) !important; /* Slightly darker */
+    background: rgba(0,0,0,0.4) !important; /* MODIFIED: Slightly more transparent background */
     backdrop-filter: blur(var(--blur)) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4); /* Subtle shadow */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* MODIFIED: Subtler shadow */
 }
 .fullInnerCardFooter {
     bottom: 8% !important; /* Slightly higher */

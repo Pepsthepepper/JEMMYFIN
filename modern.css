@@ -1,0 +1,1250 @@
+/* Variables */
+:root {
+    /* PRIMARY ACCENT COLOR: Adjust these RGB values to match your desired theme color */
+    --primary-r: 0;
+    --primary-g: 164;
+    --primary-b: 220;
+    --primary-accent-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 1.0);
+    --secondary-accent-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.15); /* Slightly less opaque */
+
+    /* BACKGROUND COLORS: Adjust these for your dark theme */
+    --primary-background-color: #0A0A0A; /* Deeper dark background */
+    --secondary-background-color: #151515; /* Slightly lighter for cards/drawers */
+    --primary-background-transparent: rgba(25, 25, 25, 0.6); /* Darker, more prominent transparent background */
+    --secondary-background-transparent: rgba(0, 0, 0, 0.7); /* Slightly more opaque black for overlays */
+
+    /* UI ELEMENTS */
+    --rounded-cards: 18px; /* Slightly more rounded */
+    --blur: 15px; /* More pronounced blur effect for glassmorphism */
+    --border-radius-pill: 9999px; /* Standard pill shape for buttons/tabs */
+    --transition-speed: 0.3s; /* Global transition speed for smooth animations */
+
+    /* Alternate accent shades (adjusting for the new primary-r/g/b base) */
+    --primary-alt1: rgb(calc(var(--primary-r) + 20), calc(var(--primary-g) + 20), calc(var(--primary-b) + 20), 1);
+    --primary-alt2: rgb(calc(var(--primary-r) + 15), calc(var(--primary-g) + 15), calc(var(--primary-b) + 15), 0.9);
+    --primary-alt3: rgb(calc(var(--primary-r) + 10), calc(var(--primary-g) + 10), calc(var(--primary-b) + 10), 0.8);
+    --primary-alt4: rgb(calc(var(--primary-r) + 5), calc(var(--primary-g) + 5), calc(var(--primary-b) + 5), 0.7);
+    --primary-alt5: rgb(var(--primary-r), var(--primary-g), var(--primary-b), 0.6);
+}
+
+/* --- Dynamic UI Colors based on Background Image (MANUAL ADJUSTMENT) --- */
+/* You MUST manually update --primary-r, --primary-g, --primary-b and the background-image URL
+   in the :root and .backgroundContainer sections above/below to match your chosen image.
+   CSS CANNOT read image data to extract colors automatically. */
+
+/* Set your desired background image here */
+.backgroundContainer {
+    background-image: url('https://source.unsplash.com/random/1920x1080?abstract,dark') !important; /* REPLACE WITH YOUR IMAGE URL */
+    background-size: cover !important;
+    background-position: center center !important;
+    filter: brightness(0.7) blur(8px); /* Adjust brightness and blur to make UI elements stand out */
+    transition: filter var(--transition-speed) ease-out; /* Smooth transition for background changes */
+}
+
+/* Setting accent color variable */
+.emby-checkbox:checked + span + .checkboxOutline,
+.selectionCommandsPanel,
+.countIndicator,
+.MuiButton-root.MuiButton-containedSizeMedium,
+.MuiChip-root.MuiChip-colorInfo:not(.MuiChip-colorError),
+progress[aria-valuenow]:before {
+    background: var(--primary-accent-color) !important;
+}
+progress::-moz-progress-bar {
+    background: var(--primary-accent-color) !important;
+}
+progress::-webkit-progress-value {
+    background: var(--primary-accent-color) !important;
+}
+.MuiAlert-root.MuiAlert-standardInfo {
+    background: var(--secondary-accent-color) !important;
+}
+.emby-checkbox:checked + span + .checkboxOutline,
+.emby-checkbox:focus:not(:checked) + span + .checkboxOutline,
+.emby-input:focus,
+.emby-textarea:focus,
+.emby-select-withcolor:focus,
+.mdl-spinner__layer-1,
+.mdl-spinner__layer-2,
+.mdl-spinner__layer-3,
+.mdl-spinner__layer-4,
+.progressring-spiner {
+    border-color: var(--primary-accent-color) !important;
+}
+.page:not(.itemDetailPage) .button-link,
+.selectLabelFocused,
+.textareaLabelFocused,
+.inputLabelFocused,
+.emby-tab-button:hover,
+.metadataSidebarIcon,
+.upNextDialog-countdownText,
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeInherit,
+.listItemImageButton:hover,
+.button-flat:hover,
+#divRunningTasks span {
+    color: var(--primary-accent-color) !important;
+}
+@media (hover: hover) and (pointer: fine) {
+    .paper-icon-button-light:hover:not(:disabled) {
+        color: var(--primary-accent-color) !important;
+        background-color: var(--secondary-accent-color) !important;
+        transition: color var(--transition-speed), background-color var(--transition-speed); /* Smooth hover */
+    }
+}
+
+/* Increase size of Jellyfin logo */
+.layout-desktop .pageTitleWithLogo {
+    margin-left: 30px !important; /* Slightly more prominent */
+    height: 45px !important; /* Slightly larger */
+}
+
+/* Fix for empty header with padding */
+[dir="ltr"] .pageTitle:not(.pageTitleWithLogo):empty {
+    margin: 0 !important;
+}
+
+/* Static left drawer */
+.layout-desktop .mainDrawer {
+    left: 0 !important;
+    top: 0 !important;
+    width: 260px !important; /* Slightly wider */
+    background: var(--secondary-background-color) !important;
+    z-index: 998 !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+/* Lower drawer buttons */
+.layout-desktop .mainDrawer-scrollContainer {
+    margin-top: 100px !important; /* Adjusted for larger logo/header */
+    margin-left: 15px !important; /* More padding */
+    padding-right: 15px; /* Add right padding */
+}
+.layout-mobile .mainDrawer-scrollContainer {
+    margin-top: 20px !important;
+}
+/* Shift content to the right */
+.layout-desktop .libraryPage:not(#editItemMetadataPage) {
+    margin-left: 260px !important; /* Matches drawer width */
+}
+/* Fix for Jellyfin Media Player */
+.quickConnectSettingsContainer {
+    margin-left: 260px !important;
+}
+/* Hide transition on page load */
+.layout-desktop .touch-menu-la.transition {
+    transition: none !important;
+}
+/* Hide hamburger button */
+.layout-desktop .mainDrawerButton {
+    display: none !important;
+}
+/* Fix for dashboard leaking out of the sections */
+.dashboardColumn {
+    flex-shrink: inherit;
+}
+/* Fix for dashboard drawer button height */
+.layout-desktop .dashboardDocument .mainDrawer-scrollContainer {
+    padding-top: 0 !important;
+}
+/* Hide home button */
+.layout-desktop .headerHomeButton {
+    display: none !important;
+}
+.layout-desktop .dashboardDocument .headerHomeButton {
+    display: block !important;
+}
+/* Fix for video player and login page */
+.layout-desktop .hide-scroll .mainDrawer,
+.layout-desktop .hideMainDrawer .mainDrawer {
+    left: -320px !important;
+}
+/* Fix for scroll menus on home page */
+.emby-scroller {
+    margin-right: -1% !important; /* Slightly less aggressive margin */
+}
+/* Fix for collection items misalignment */
+.layout-desktop .collectionItems .collectionItemsContainer {
+    padding-left: 0% !important;
+}
+.layout-desktop .collectionItems .sectionTitleContainer {
+    padding-left: 0% !important;
+}
+/* Dynamic buttons */
+.layout-desktop .navMenuOption:hover:not(.navMenuOption-selected) {
+    transform: scale(1.02) !important; /* Subtler scale effect */
+    transition: transform var(--transition-speed);
+}
+.layout-desktop .listItem {
+    transition: transform var(--transition-speed), background-color var(--transition-speed), box-shadow var(--transition-speed) !important;
+    border-radius: var(--rounded-cards) !important;
+}
+.layout-desktop #myPreferencesMenuPage .listItem:hover {
+    transform: scale(1.005); /* Even subtler */
+    background-color: rgba(255, 255, 255, 0.05); /* Slight highlight */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add depth */
+}
+
+
+
+/* Rounded cards */
+.cardContent,
+.cardPadder,
+.cardOverlayContainer,
+.blurhash-canvas,
+.dialog,
+.itemSelectionPanel,
+.nowPlayingPageImage {
+    border-radius: var(--rounded-cards) !important;
+    overflow: hidden; /* Ensure content respects border-radius */
+}
+/* Rounded selection menu */
+.itemSelectionPanel {
+    border: 2px solid var(--primary-accent-color) !important;
+    box-shadow: 0 0 15px var(--secondary-accent-color); /* Glow effect */
+}
+.itemSelectionPanel .checkboxOutline {
+    margin: 8px !important; /* Slightly larger */
+}
+
+
+
+/* Floating progress bar */
+.innerCardFooter {
+    border-radius: var(--rounded-cards) !important;
+    margin-left: 8px !important; /* More spacing */
+    margin-bottom: 8px !important;
+    padding: 6px 18px 6px 6px !important; /* Increased padding */
+    bottom: 0% !important;
+    background: rgba(0,0,0,0.6) !important; /* Slightly darker */
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4); /* Subtle shadow */
+}
+.fullInnerCardFooter {
+    bottom: 8% !important; /* Slightly higher */
+    width: 92% !important; /* Wider */
+    margin: auto !important;
+    border-radius: var(--border-radius-pill) !important; /* Pill shape */
+    padding: 0px !important;
+    backdrop-filter: none !important;
+}
+.itemProgressBar:not(.playbackProgress):not(.transcodingProgress):not(.backgroundProgress) {
+    height: 12px !important; /* Thicker progress bar */
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(5px) !important; /* Subtler blur */
+    border-radius: var(--border-radius-pill) !important;
+}
+.innerCardFooterClear {
+    background-color: none !important;
+}
+.innerCardFooter .cardText {
+    padding: 0 0 0 12px !important /* More padding */
+}
+.cardImageContainer .innerCardFooter .itemProgressBar .itemProgressBarForeground {
+    background: var(--primary-accent-color) !important;
+}
+.itemProgressBarForeground {
+    border-radius: var(--border-radius-pill) !important;
+}
+.transcodingProgress > div {
+    background-color: hsla(0,0%,100%,.25) !important; /* Slightly more visible */
+}
+.activeSession .backgroundProgress,
+.activeSession .playbackProgress,
+.activeSession .transcodingProgress {
+    bottom: 15px !important; /* Lifted higher */
+    border-radius: var(--border-radius-pill) !important;
+    width: 95% !important; /* Wider */
+    left: 2.5% !important; /* Centered */
+}
+.sessionNowPlayingInnerContent {
+    padding-bottom: 15px !important;
+    padding-inline: 20px !important;
+}
+.sessionAppInfo {
+    padding: .6em 0em !important;
+}
+.sessionNowPlayingInfo {
+    padding: 1em 0em !important;
+}
+
+
+
+/* Green watched indicator */
+.playedIndicator {
+    background: #34A853 !important; /* Google Green for a more modern feel */
+    box-shadow: 0 0 8px rgba(52, 168, 83, 0.5); /* Subtle glow */
+}
+
+
+
+/* Rounded left drawer buttons */
+.navMenuOption,
+.navMenuOption:hover,
+.navMenuOption-selected {
+    border-radius: var(--border-radius-pill) !important;
+    width: 90% !important; /* Wider buttons */
+    margin: auto !important;
+    text-align: center !important;
+    height: 48px !important; /* Taller buttons */
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), color var(--transition-speed);
+}
+.navMenuOption:hover:not(.navMenuOption-selected) {
+    background-color: rgba(50, 50, 50, 0.7); /* Slightly lighter on hover */
+}
+/* Center icons and text and shift to the left */
+.navMenuOptionIcon,
+.navMenuOptionText {
+    position: inherit !important;
+    left: -8% !important; /* Slightly less shift */
+    margin-top: 0 !important;
+}
+/* Fix for header buttons */
+.layout-desktop .emby-button-foreground {
+    top: -10px !important;
+}
+.layout-tv .emby-button-foreground {
+    top: -16px !important;
+}
+
+
+
+/* Custom button color */
+.navMenuOption-selected {
+    background: var(--secondary-accent-color) !important;
+    color: var(--primary-accent-color) !important;
+    box-shadow: 0 0 10px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.3); /* Subtle glow */
+}
+
+/* Modified background color */
+html,
+.backgroundContainer:not(.withBackdrop):not(.backgroundContainer-transparent),
+.noBackdropTransparency .detailPageSecondaryContainer {
+    background-color: var(--primary-background-color) !important;
+}
+
+
+/* Transparent header bar */
+.skinHeader {
+    background-color: transparent !important;
+    position: sticky; /* Make it sticky */
+    top: 0;
+    z-index: 1000; /* Ensure it's on top */
+}
+.layout-desktop .skinHeader,
+.layout-tv .skinHeader {
+    padding-top: 1.8em !important; /* More padding */
+    padding-bottom: 0.8em !important; /* Consistent padding */
+}
+.layout-tv .skinHeader {
+    padding-bottom: 12px !important;
+}
+/* Rounded header buttons */
+.headerTabs,
+.headerRight {
+    background-color: var(--primary-background-transparent) !important;
+    border-radius: var(--border-radius-pill) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Add depth */
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+.layout-desktop .headerTabs,
+.layout-tv .headerTabs {
+    margin-bottom: 12px !important; /* Slightly more margin */
+}
+.layout-desktop .headerTabs {
+    margin-left: 170px !important; /* Adjusted for wider drawer */
+    margin-top: -65px !important; /* Adjusted for taller header */
+}
+/* Button height */
+.headerRight,
+.emby-tab-button {
+    height: 48px !important; /* Taller buttons */
+}
+/* Lower header and add padding to right buttons */
+.layout-desktop .headerRight {
+    padding: 0px 8px !important; /* More padding */
+}
+.layout-tv .headerRight {
+    padding: 22px 12px !important;
+}
+/* Move left header back up */
+.layout-desktop .headerLeft
+.layout-tv .headerLeft {
+    position: relative !important;
+    top: -20px !important; /* Adjusted */
+}
+/* Mobile fixes */
+.layout-mobile .headroom--unpinned {
+    transform: translateY(-60%); /* More unpinned */
+}
+.layout-mobile .sectionTabs {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+}
+.layout-mobile .emby-button-foreground {
+    top: -3px !important;
+}
+.layout-mobile .skinHeader {
+    transition: background-color var(--transition-speed), backdrop-filter var(--transition-speed) !important;
+}
+.layout-mobile .mainDrawer {
+    background: var(--secondary-background-color) !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+.layout-mobile .headroom--unpinned {
+    transform: none;
+}
+.layout-mobile .headroom--unpinned:has(.headerTabs.sectionTabs:not(.hide))  {
+    transform: translateY(-55%); /* Adjusted */
+}
+.layout-mobile .headroom--not-top {
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.layout-mobile .headroom--not-top .headerRight {
+    background: none !important;
+}
+.layout-mobile .headroom--top,
+.layout-mobile .headroom--not-top:has(.headerTabs.sectionTabs:not(.hide)) {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none;
+}
+.layout-mobile .headroom--top .headerRight ,
+.layout-mobile .headroom--not-top:has(.headerTabs.sectionTabs:not(.hide)) .headerRight {
+    background: var(--primary-background-transparent) !important;
+}
+@media (max-width: 380px) {
+    .layout-mobile .pageTitle:not(.pageTitleWithLogo):not(:empty) {
+        position: absolute !important;
+        margin-left: 50% !important;
+        transform: translate(-50%, 0) !important;
+        top: 65px !important; /* Adjusted */
+    }
+    .layout-mobile .headerTop:has(.pageTitle:not(.pageTitleWithLogo):not(:empty)) {
+        -webkit-align-items: start !important;
+        align-items: start !important;
+    }
+    .layout-mobile .skinHeader:has(.pageTitle:not(.pageTitleWithLogo):not(:empty)) {
+        height: 120px !important; /* Taller */
+    }
+    .layout-mobile .skinHeader:has(.pageTitle:not(.pageTitleWithLogo):not(:empty)):has(.sectionTabs:not(.hide)) {
+        height: 150px !important; /* Taller */
+    }
+    .layout-mobile .libraryPage:not(.noSecondaryNavPage) {
+        padding-top: 10.5em !important; /* Adjusted */
+    }
+    .layout-mobile .headroom--unpinned:has(.headerTabs.sectionTabs:not(.hide)):has(.pageTitle:not(.pageTitleWithLogo):not(:empty)) {
+        transform: translateY(-65%); /* Adjusted */
+    }
+}
+
+
+
+/* Player modifications */
+.upNextContainer:not(#skipIntro), .toastVisible {
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5); /* More prominent shadow */
+}
+.upNextContainer:not(#skipIntro) {
+    border-radius: var(--rounded-cards) !important;
+    background-color: rgba(0, 0, 0, 0.7) !important; /* Darker background */
+}
+.upNextContainer {
+    margin: 5% !important; /* More margin */
+}
+.toastVisible {
+    border-radius: var(--border-radius-pill) !important; /* Pill shape */
+    background-color: var(--primary-background-transparent) !important;
+    padding: 15px 25px !important; /* More padding */
+}
+.sliderBubble {
+    border-radius: var(--rounded-cards) !important;
+    background-color: var(--secondary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+.sliderBubble:not(.osdVolumeSliderContainer .sliderBubble):has(.chapterThumbContainer) {
+    background-color: #ffffff00 !important;
+    top: 30px !important; /* Lifted */
+    backdrop-filter: unset !important;
+}
+@supports selector(div:not(.parent .child)) {
+    .mdl-slider-background-flex:not(.layout-mobile .nowPlayingBar .mdl-slider-background-flex) {
+        height: 12px !important; /* Thicker */
+        margin-top: -6px !important;
+        border-radius: var(--border-radius-pill) !important;
+        background: hsla(0,0%,100%,.25) !important; /* Slightly more visible */
+    }
+}
+@supports not selector(div:not(.parent .child)) {
+    .mdl-slider-background-flex {
+        height: 12px !important;
+        margin-top: -6px !important;
+        border-radius: var(--border-radius-pill) !important;
+        background: hsla(0,0%,100%,.25) !important;
+    }
+}
+.mdl-slider-background-lower {
+    border-radius: var(--border-radius-pill) !important;
+    background-color: var(--primary-accent-color) !important;
+}
+/* Moz */
+.mdl-slider::-moz-range-thumb {
+    background: #ffffff00 !important;
+    height: 12px !important; /* Thicker */
+    width: 10px !important; /* Wider */
+    border-radius: 3px !important;
+    transition: transform var(--transition-speed), background var(--transition-speed);
+}
+.mdl-slider-hoverthumb:hover::-moz-range-thumb {
+    transform: scaleY(1.8) scaleX(1.5); /* More pronounced */
+    background: #fff !important;
+}
+/* Webkit */
+.mdl-slider::-webkit-slider-thumb {
+    background: #ffffff00 !important;
+    height: 12px !important;
+    width: 10px !important;
+    border-radius: 3px !important;
+    transition: transform var(--transition-speed), background var(--transition-speed);
+}
+.mdl-slider-hoverthumb:hover::-webkit-slider-thumb {
+    transform: scaleY(1.8) scaleX(1.5);
+    background: #fff !important;
+}
+
+.mdl-slider-background-upper {
+    border-top-right-radius: var(--border-radius-pill) !important;
+    border-bottom-right-radius: var(--border-radius-pill) !important;
+    background: hsla(0,0%,100%,.25) !important;
+    transform: translateX(-4px) !important; /* Adjusted */
+}
+.iconOsdProgressInner {
+    background: var(--primary-accent-color) !important;
+}
+
+/* Up next card */
+.upNextDialog-buttons .upNextDialog-button {
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+}
+.upNextDialog-buttons .upNextDialog-button:hover {
+    transform: scale(1.08); /* Subtler */
+    background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.2); /* Soft highlight */
+}
+
+/* Support for Jellyscrub plugin */
+.chapterThumbContainer {
+    background: none !important;
+    border-radius: var(--rounded-cards) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important; /* Add shadow */
+}
+.chapterThumb {
+    border-radius: var(--rounded-cards) !important;
+    margin-bottom: 50px !important; /* Adjusted */
+    box-shadow: 0 0 2.5vh #000 !important; /* Stronger shadow */
+}
+.chapterThumbTextContainer {
+    background: none !important;
+}
+.chapterThumbText {
+    text-align: center !important;
+}
+.chapterThumbText-dim {
+    display: none !important;
+}
+
+/* Support for IntroSkipper plugin */
+#skipIntro .btnSkipIntro {
+    transition: var(--transition-speed);
+    border-radius: var(--border-radius-pill) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+#skipIntro .btnSkipIntro:hover {
+    transition: var(--transition-speed);
+    transform: scale(1.03); /* Subtler */
+    background: var(--primary-accent-color) !important;
+    box-shadow: 0 0 15px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6) !important; /* Stronger glow */
+}
+#skipIntro .paper-icon-button-light:hover:not(:disabled) {
+    color: #FFF !important;
+}
+.sliderContainer:has(.mdl-slider-hoverthumb:not(:hover)) .sliderMarker {
+    opacity: 0 !important;
+    transition: opacity var(--transition-speed) ease-out !important;
+}
+.sliderContainer:has(.mdl-slider-hoverthumb:hover) .sliderMarker {
+    opacity: 1 !important;
+    transition: opacity var(--transition-speed) ease-in !important;
+    height: 12px !important; /* Thicker */
+    transform: translate3d(0,35%,0) !important; /* Adjusted */
+    -webkit-transform: translate3d(0,35%,0) !important;
+}
+.sliderMarker.watched {
+    background-color: #FFFFFFB0 !important; /* More opaque */
+    z-index: 10 !important;
+}
+#skipIntro .upNextContainer {
+    padding: 0px !important;
+}
+#skipIntro .emby-button {
+    background: rgba(30, 30, 30, 0.8) !important; /* Slightly darker */
+    transition: background var(--transition-speed), box-shadow var(--transition-speed);
+}
+#skipIntro .emby-button:hover {
+    box-shadow: 0 0 10px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.7) !important; /* Stronger glow */
+}
+#skipIntro .emby-button:focus {
+    background: rgba(30, 30, 30, 0.8) !important;
+    box-shadow: unset !important;
+}
+/* Support for InPlayerEpisodePreview plugin */
+.layout-desktop #popupFocusContainer {
+    padding: 15px !important; /* More padding */
+    border-radius: var(--rounded-cards); /* Apply rounded corners */
+    background: var(--secondary-background-color); /* Consistent background */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5); /* Stronger shadow */
+}
+.layout-desktop #popupTitleContainer {
+    margin: 0px !important;
+    padding: 12px 0px 12px 0px !important; /* More padding */
+}
+.layout-desktop #popupContentContainer .previewEpisodeDetails {
+    position: unset !important;
+    margin: 0px 0px 8px 15px !important; /* More padding */
+    font-size: 14px !important; /* Slightly larger font */
+}
+.layout-desktop #popupContentContainer .previewEpisodeTitle {
+    font-size: 17px !important; /* Slightly larger font */
+}
+.layout-desktop #popupContentContainer .listItem {
+    padding: .3em .3em .3em .6em !important; /* More padding */
+}
+
+/* Modify player buttons */
+.material-icons.fast_rewind::before {
+    content: "\e059";
+}
+.material-icons.fast_forward::before {
+    content: "\e057";
+}
+.material-icons.audiotrack::before {
+    content: "\e91f";
+}
+
+
+
+/* Settings and dashboard modifications */
+.emby-input,
+.emby-textarea,
+.paperList,
+.subtitleappearance-preview {
+    border-radius: var(--rounded-cards) !important;
+    background-color: var(--secondary-background-color); /* Consistent background */
+    border: 1px solid rgba(255,255,255,0.1); /* Subtle border */
+    transition: border-color var(--transition-speed);
+}
+.listItem:hover {
+    background-color: rgba(255, 255, 255, 0.08); /* Slightly more prominent hover */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add depth */
+}
+.button-submit,
+.emby-select,
+.checkboxOutline,
+.btnRefresh,
+#btnShutdown,
+.raised {
+    border-radius: var(--border-radius-pill) !important;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+.button-submit {
+    background: var(--primary-accent-color) !important;
+    box-shadow: 0 4px 15px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.4);
+}
+.button-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6);
+}
+/* Modify username placement on profile page */
+.layout-desktop #userProfilePage .readOnlyContent div:not([class]), div[class=""]{
+    align-items: initial !important;
+}
+.layout-desktop .username {
+    margin: 0px 0px 12px 12px !important; /* More spacing */
+}
+/* Red shutdown button */
+#btnShutdown {
+    background: #DC3545 !important; /* Bootstrap-like red */
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4) !important;
+}
+#btnShutdown:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6) !important;
+}
+/* Remove border under certain dashboard items */
+.listItem-border {
+    border: 0 !important;
+}
+/* Add padding to list items */
+.layout-desktop .listItem,
+.layout-tv .listItem {
+    padding-inline: 18px !important; /* More padding */
+    padding-block: 10px !important; /* Vertical padding */
+}
+/* Rounded dashboard cards */
+.cardBox {
+    border-radius: var(--rounded-cards) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+/* Removed ugliness of border-card styling */
+.layout-desktop fieldset.verticalSection-extrabottompadding,
+.layout-tv fieldset.verticalSection-extrabottompadding {
+    border-radius: var(--rounded-cards) !important;
+    border-color: #282828 !important; /* Darker border */
+    padding: 15px 40px !important; /* More padding */
+    background-color: var(--secondary-background-color); /* Consistent background */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+/* Rounded tab selections in dashboard */
+.layout-desktop .localnav {
+    border-radius: var(--border-radius-pill) !important;
+    background: #202020 !important;
+    width: fit-content !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.layout-desktop a[data-role="button"] {
+    background: none !important;
+    transition: background var(--transition-speed), color var(--transition-speed);
+}
+.layout-desktop div[data-role="controlgroup"] a.ui-btn-active {
+    background: var(--primary-accent-color) !important;
+    border-radius: var(--border-radius-pill) !important;
+    box-shadow: 0 0 10px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.3);
+}
+.layout-desktop .dashboardDocument .mainAnimatedPage {
+    left: 270px !important; /* Adjusted for wider drawer */
+}
+#libraryDisplayPage,
+#metadataImagesConfigurationPage,
+#metadataNfoPage {
+    margin-top: 50px !important; /* More margin */
+}
+#mediaLibraryPage {
+    margin-top: 15px !important;
+}
+/* Re-align active devices in dashboard */
+.activeDevices.itemsContainer {
+    margin: 0px !important;
+}
+.playbackProgress > div {
+    background: var(--primary-accent-color) !important;
+}
+/* IntroSkipper settings */
+.layout-desktop summary {
+    border-radius: var(--border-radius-pill) !important;
+    padding: 10px 20px; /* Add padding */
+    background-color: var(--secondary-background-color); /* Consistent background */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background-color var(--transition-speed);
+}
+.layout-desktop summary:hover {
+    background-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.1);
+}
+
+#intro_reqs,
+#edl,
+#silence,
+#support {
+    padding-bottom: 15px !important;
+}
+/* Dashboard fixes for 10.9.x */
+.layout-desktop #userProfilesPage {
+    left: 270px !important; /* Adjusted */
+}
+.MuiAlert-message {
+    color: #fff !important;
+}
+.MuiDataGrid-root.MuiDataGrid-withBorderColor {
+    border-radius: var(--rounded-cards) !important;
+    border-color: rgba(255,255,255,0.1) !important; /* Subtle border */
+    background-color: var(--secondary-background-color); /* Consistent background */
+}
+.infoBanner {
+    border-radius: var(--rounded-cards) !important;
+    background-color: var(--secondary-accent-color); /* Consistent with other info */
+}
+.MuiToggleButton-root.MuiToggleButtonGroup-groupedHorizontal {
+    border-radius: var(--border-radius-pill);
+    padding-inline: 18px !important;
+    background-color: var(--secondary-background-color);
+    border-color: rgba(255,255,255,0.1) !important;
+    color: #ccc !important;
+    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
+}
+.MuiToggleButton-root.MuiToggleButtonGroup-groupedHorizontal.Mui-selected {
+    background-color: var(--primary-accent-color) !important;
+    color: #fff !important;
+    border-color: var(--primary-accent-color) !important;
+}
+.MuiAppBar-root.MuiAppBar-positionFixed {
+    padding: 12px !important; /* More padding */
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.MuiList-root.MuiList-subheader {
+    padding-left: 12px !important;
+}
+.MuiList-subheader .MuiListItem-root.MuiListItem-gutters {
+    width: 88% !important; /* Slightly wider */
+    margin-inline: auto !important;
+}
+/* Fix for plugins section of dashboard */
+[aria-labelledby="plugins-subheader"].MuiList-subheader .MuiListItemButton-root.MuiListItemButton-gutters {
+    width: 88% !important;
+    margin-inline: auto !important;
+}
+.MuiList-subheader .MuiListItemButton-root.MuiListItemButton-gutters {
+    border-radius: var(--border-radius-pill) !important;
+    margin: 4px 0px !important; /* More vertical margin */
+    transition: transform var(--transition-speed), background var(--transition-speed), color var(--transition-speed) !important;
+    height: 48px !important /* Taller */
+}
+.MuiList-subheader .MuiListItemButton-root.MuiListItemButton-gutters:not(.Mui-selected) .MuiListItemIcon-root,
+.MuiList-subheader .MuiListItemButton-root.MuiListItemButton-gutters:not(.Mui-selected) {
+    color: #B0B0B0; /* Slightly lighter default text */
+}
+.MuiList-subheader .MuiListItemButton-root.MuiListItemButton-gutters:hover:not(.Mui-selected) {
+    transform: scale(1.02) !important; /* Subtler scale */
+    background: rgba(50, 50, 50, 0.7) !important; /* Darker hover */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Add depth */
+}
+.MuiListItemButton-root.Mui-selected {
+    background: var(--secondary-accent-color) !important;
+    box-shadow: 0 0 10px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.3);
+}
+.MuiListItemButton-root.Mui-selected .MuiListItemIcon-root,
+.MuiListItemButton-root.Mui-selected {
+    color: var(--primary-accent-color) !important;
+}
+.MuiPaper-root.MuiDrawer-paperAnchorDockedLeft {
+    border-right: none !important;
+    background: var(--secondary-background-color) !important;
+    width: 260px !important; /* Wider */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+.MuiListItemIcon-root.MuiSvgIcon-fontSizeMedium {
+    color: inherit !important;
+}
+.MuiPaper-root.MuiPopover-paper {
+    background: #202020 !important; /* Darker popover */
+    color: #E0E0E0 !important; /* Lighter text */
+    border-radius: var(--rounded-cards) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5); /* Stronger shadow */
+}
+.listItemIcon:not(.listItemIcon-transparent):not(.notification_important) {
+    background: var(--secondary-accent-color) !important;
+    color: var(--primary-accent-color) !important;
+    border-radius: 50%; /* Ensure perfect circle for icons */
+}
+.MuiList-root:not(.MuiList-subheader) .MuiListItemButton-root.MuiListItemButton-gutters {
+    padding: 18px 40px 12px 40px !important; /* Adjusted padding */
+}
+.MuiCollapse-root.MuiCollapse-vertical .MuiListItemButton-root.MuiListItemButton-gutters {
+    width: 88% !important;
+    margin-inline: auto !important;
+    padding: 10px 20px !important; /* More padding */
+}
+/* Dynamic colors for "Active Devices" section to respect theme */
+.defaultCardBackground1 {
+    background-color: var(--primary-alt1) !important;
+}
+.defaultCardBackground2 {
+    background-color: var(--primary-alt2) !important;
+}
+.defaultCardBackground3 {
+    background-color: var(--primary-alt3) !important;
+}
+.defaultCardBackground4 {
+    background-color: var(--primary-alt4) !important;
+}
+.defaultCardBackground5 {
+    background-color: var(--primary-alt5) !important;
+}
+
+
+
+/* Metadata editor fixes */
+.layout-desktop .editPageSidebar {
+    width: 23vw !important; /* Slightly narrower to balance */
+    background-color: var(--secondary-background-color);
+    border-radius: var(--rounded-cards);
+    padding: 20px 10px; /* Add padding */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.layout-desktop .editPageInnerContent {
+    width: 76vw !important; /* Adjusted */
+}
+.jstree-default-large .jstree-node {
+    line-height: 40px !important; /* Taller line height */
+}
+.jstree-default .jstree-wholerow-clicked {
+    background: var(--secondary-accent-color) !important;
+    border-radius: 8px; /* Slightly rounded for selection */
+}
+.jstree-wholerow-hovered {
+    background: var(--primary-background-transparent) !important;
+    border-radius: 8px;
+}
+.jstree-children {
+    margin-left: -15px !important; /* Adjusted */
+}
+#editItemMetadataPage .btnHeaderSave {
+    background: var(--primary-accent-color) !important;
+    border-radius: var(--border-radius-pill) !important;
+    height: 45px !important; /* Taller */
+    color: white !important;
+    font-weight: 600; /* Bolder text */
+    box-shadow: 0 4px 15px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.4);
+}
+#editItemMetadataPage .btnHeaderSave:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6);
+}
+
+
+/* Resize show/movie image on details page */
+.layout-desktop .detailImageContainer .card {
+    top: 10em !important; /* Lowered slightly */
+    width: 19vw !important; /* Slightly larger */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* Stronger shadow */
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+.layout-desktop .detailImageContainer .card:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+}
+
+/* Re-position content on details page */
+.layout-desktop .detailSection {
+    margin-right: 0 !important;
+}
+.layout-desktop .detailPageContent {
+    padding-left: 3.5% !important; /* Slightly more padding */
+}
+
+/* Re-position logo */
+.layout-desktop .detailLogo,
+.layout-tv .detailLogo {
+    right: 0 !important;
+    left: 4.5% !important; /* Adjusted */
+    top: 12% !important; /* Lowered */
+    max-width: 350px; /* Constrain size */
+    opacity: 0.9; /* Slightly less opaque */
+}
+
+/* Transparent ribbon bar */
+.detailRibbon {
+    background: transparent !important;
+}
+
+/* Add card around top-right buttons */
+.mainDetailButtons {
+    background: var(--primary-background-transparent) !important;
+    border-radius: var(--border-radius-pill) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    padding: 5px 15px; /* Add padding */
+}
+
+/* Add card around groups section */
+.layout-desktop .detailsGroupItem {
+    background: var(--secondary-background-color) !important;
+    padding: 15px 25px !important; /* More padding */
+    border-radius: var(--rounded-cards) !important;
+    width: fit-content !important;
+    max-width: max-content !important;
+    display: flex;
+    gap: 1.5em; /* More space */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Fix for group section labels */
+.detailsGroupItem .label, .trackSelections .selectContainer .selectLabel {
+    min-width: 80px; /* Slightly wider */
+    flex-basis: unset;
+    margin: unset;
+    font-weight: 600; /* Bolder label */
+}
+
+/* Alternative mobile group section card */
+.layout-mobile .itemDetailsGroup {
+    background: var(--secondary-background-color) !important;
+    padding: 20px 25px 10px 25px !important; /* More padding */
+    border-radius: var(--rounded-cards) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.layout-mobile .detailPageContent {
+    padding-right: 0 !important;
+}
+
+/* Add card around description */
+.layout-desktop .detailSectionContent {
+    background: var(--secondary-background-color) !important;
+    border-radius: var(--rounded-cards) !important;
+    padding: 45px 25px 15px 25px !important; /* More padding */
+    margin-top: 60px !important; /* More spacing */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3); /* Stronger shadow */
+}
+.layout-mobile .detailSectionContent {
+    background: var(--secondary-background-color) !important;
+    border-radius: var(--rounded-cards) !important;
+    padding: 15px 25px !important; /* More padding */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Add card around track selection */
+.trackSelections {
+    background: var(--secondary-background-color) !important;
+    border-radius: var(--rounded-cards) !important;
+    padding: 15px 25px !important; /* More padding */
+    margin-top: 25px !important; /* More spacing */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Fix for track select dropdowns */
+.trackSelections .selectContainer .detailTrackSelect {
+    padding: 0 12px; /* More padding */
+    margin-left: 12px !important; /* More margin */
+}
+
+/* Re-position title */
+.layout-desktop .infoWrapper {
+    margin-top: 260px !important; /* Adjusted */
+    margin-left: 21.5vw !important; /* Adjusted */
+}
+.layout-desktop .detailPagePrimaryContainer {
+    padding-left: 3.5% !important;
+}
+.layout-desktop .nameContainer {
+    position: absolute !important;
+    margin-top: -55px !important; /* Adjusted */
+}
+.layout-desktop .itemMiscInfo {
+    position: absolute !important;
+    margin-left: 15px !important; /* More margin */
+    margin-top: 20px !important; /* More margin */
+}
+
+/* Move description box */
+.layout-desktop .detailPagePrimaryContent {
+    padding-left: 21vw !important; /* Adjusted */
+}
+.layout-mobile .detailPagePrimaryContent {
+    padding-right: 5% !important;
+}
+/* Padding for 2:3 posters */
+.layout-desktop .detailPageWrapperContainer:has(.detailImageContainer .portraitCard) .detailPagePrimaryContent {
+    min-height: 30vw !important; /* Slightly taller */
+}
+/* Padding for 1:1 posters */
+.layout-desktop .detailPageWrapperContainer:has(.detailImageContainer .squareCard) .detailPagePrimaryContent {
+    min-height: 21vw !important; /* Slightly taller */
+}
+/* Padding for 16:9 posters */
+.layout-desktop .detailPageWrapperContainer:has(.detailImageContainer .backdropCard) .detailPagePrimaryContent {
+    min-height: 13vw !important; /* Slightly taller */
+}
+/* Fix for JMP */
+@supports not selector(:has(*)) {
+    .layout-desktop .detailPageWrapperContainer .detailPagePrimaryContent {
+        min-height: 30vw !important;
+    }
+}
+
+/* Move track selection box */
+.detailSection {
+    display: flex; /* Use flexbox */
+    flex-direction: column;
+}
+.detailSection .detailSectionContent {
+    order: 1;
+}
+.detailSection .recordingFields {
+    order: 2;
+}
+.detailSection .trackSelections {
+    order: 3;
+}
+.detailSection .itemDetailsGroup {
+    order: 4;
+}
+/* Move episode title */
+.layout-desktop .nameContainer {
+    display: flex; /* Use flexbox */
+    flex-direction: row;
+    align-items: baseline; /* Align baselines */
+}
+.layout-desktop .nameContainer .parentName {
+    order: 1;
+}
+.layout-desktop .nameContainer .itemName {
+    order: 2;
+}
+/* Modify original title / episode name position */
+.layout-desktop .nameContainer .itemName.originalTitle {
+    margin: .6em 22px !important; /* More margin */
+}
+.layout-desktop .nameContainer .itemName.infoText.subtitle {
+    margin: .6em 22px !important;
+    padding: 0px !important;
+}
+/* Modify play button */
+.layout-desktop .mainDetailButtons .btnPlay::after {
+    content: "Play" !important;
+    font-weight: 600;
+    margin-left: 8px; /* Space between icon and text */
+}
+.layout-desktop .mainDetailButtons .btnPlay {
+    position: relative !important;
+    margin-right: -90px !important; /* Adjusted */
+    padding-right: 25px !important; /* More padding */
+    right: 120px !important; /* Adjusted */
+    background: var(--primary-accent-color) !important;
+    border-radius: var(--border-radius-pill) !important;
+    color: var(--secondary-background-color) !important; /* Ensure good contrast */
+    height: 48px; /* Taller */
+    display: flex; /* Use flex for icon and text alignment */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.5);
+    transition: transform var(--transition-speed), background var(--transition-speed), box-shadow var(--transition-speed);
+}
+.layout-desktop .mainDetailButtons .btnPlay:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.7);
+}
+.layout-desktop .mainDetailButtons .detailButton {
+    flex-direction: row !important; /* Use flex-direction */
+}
+/* Change crop for list item images */
+.listItemImage {
+    background-size: cover !important; /* 'cover' is often more modern for list items */
+    border-radius: var(--rounded-cards);
+}
+
+
+/* Live TV */
+/* Modified background color of active guide cells */
+.programCell-active {
+    background: var(--secondary-background-color) !important;
+    box-shadow: inset 0 0 8px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.1); /* Subtle inner shadow */
+}
+/* Repositioned record button */
+.recordingFields {
+    margin: 8px 0 -10px 0 !important; /* Adjusted */
+}
+.recordingButton {
+    height: 45px !important; /* Taller */
+}
+.recordingIcon {
+    color: #DC3545 !important; /* Consistent red */
+}
+/* Remove overlapping text */
+.itemMiscInfo.itemMiscInfo-secondary {
+    margin-left: 70px !important; /* Adjusted */
+}
+
+
+
+/* Music Player */
+.layout-desktop .appfooter {
+    margin-left: 260px !important; /* Adjusted */
+    background: var(--secondary-background-color);
+    border-top: 1px solid rgba(255,255,255,0.05); /* Subtle border */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3); /* Top shadow */
+    padding: 15px 0; /* Add vertical padding */
+}
+.layout-desktop .appfooter .nowPlayingBarInfoContainer {
+    margin-left: 15px !important; /* More margin */
+}
+.layout-desktop .volumeOsd {
+    border-radius: var(--rounded-cards) !important;
+    background: var(--secondary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+.layout-desktop .nameContainer .musicParentName {
+    margin-top: 20px !important;
+    margin-right: 25px !important;
+}
+.layout-desktop .appfooter .nowPlayingBar {
+    margin-top: 25px !important; /* More space */
+}
+.layout-desktop .appfooter .nowPlayingBar .nowPlayingBarPositionContainer {
+    top: -18px !important; /* Adjusted */
+}
+
+
+
+/* Fix for scaling issues */
+@media (width: 1600px) {
+    .layout-desktop .headerRight {
+        margin-bottom: 0 !important;
+    }
+    .layout-desktop .emby-button-foreground {
+        top: -5px !important;
+    }
+}
+@media (max-width: 1599px) {
+    .layout-desktop .pageTitleWithLogo {
+        margin-left: 30px !important;
+    }
+    .layout-desktop .headerTabs {
+        margin-top: -70px !important; /* Adjusted */
+    }
+    .layout-desktop .headerRight {
+        margin-right: 20px !important; /* More margin */
+    }
+    .layout-desktop .sectionTabs {
+        width: auto !important;
+        align-self: center !important;
+    }
+    .layout-desktop .emby-button-foreground {
+        top: -3px !important;
+    }
+}
+
+
+
+/* Fixes for TV Layout */
+.layout-tv .sectionTabs {
+    width: auto !important;
+}
+.layout-tv .headerLeft {
+    padding: 8px !important; /* More padding */
+}
+
+
+
+/* Login page */
+.layout-desktop #loginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure it takes full viewport height */
+    background-color: var(--primary-background-color); /* Consistent background */
+}
+.layout-desktop #loginPage .padded-left.padded-right.padded-bottom-page.margin-auto-y {
+    background: var(--secondary-background-color) !important;
+    width: 450px !important; /* Slightly wider */
+    padding: 40px !important; /* More internal padding */
+    border-radius: var(--rounded-cards) !important;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.6); /* Stronger, deeper shadow */
+    border: 1px solid rgba(255,255,255,0.05); /* Subtle border */
+}
